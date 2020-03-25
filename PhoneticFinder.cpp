@@ -1,7 +1,8 @@
 #include <iostream> 
 #include <string>
+#include "PhoneticFinder.hpp"
 using namespace std;
-string find(string txt , string word)
+string phonetic::find(string txt , string word)
 {
 return "okItsWorking";
 }

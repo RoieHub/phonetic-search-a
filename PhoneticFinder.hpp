@@ -5,5 +5,5 @@ using namespace std;
 
 namespace phonetic
 {
-string find(string txt , string word); 
+	string find(string txt , string word); 
 }

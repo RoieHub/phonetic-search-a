@@ -1,0 +1,253 @@
+/**
+ *
+ * AUTHORS: <Roie Malykin>
+ */
+
+#include "doctest.h"
+#include "PhoneticFinder.hpp"
+using namespace phonetic;
+
+#include <string>
+using namespace std;
+
+TEST_CASE("Test other symbols'.',',':' ") 
+{
+    string text = "murloc, love . his :wife";
+    CHECK(find(text, "murloc") == string("murloc"));//False
+    CHECK(find(text, "murloc,") == string("murloc"));//False
+    CHECK(find(text, "love") == string("love"));//False
+    CHECK(find(text, "his :") == string("his"));//False
+    CHECK(find(text, "wife") == string("wife"));//False
+    CHECK(find(text, ":wife") == string(":wife"));//False
+    
+}
+TEST_CASE("Test  backwords") 
+{
+    string text = "Yossi baKinor issOy";
+    CHECK(find(text, "Yossi") == string("Yossi"));
+    CHECK(find(text, "yoSSi") == string("issoy"));
+    CHECK(find(text, "baKinor") == string("ronikab"));//False
+    CHECK(find(text, "baKinor") == string("roniKab"));//False   
+}
+
+TEST_CASE("Test replacement of p and b") 
+{
+    string text = "xxx happy yyy";
+    CHECK(find(text, "happy") == string("happy"));
+    CHECK(find(text, "habby") == string("happy"));
+    CHECK(find(text, "hapby") == string("happy"));
+    CHECK(find(text, "habpy") == string("happy"));
+    
+}
+
+TEST_CASE("Test replacement of lower-case and upper-case")
+ {
+    string text = "Happi xxx yyy";
+    CHECK(find(text, "happi") == string("Happi"));
+    CHECK(find(text, "Happi") == string("Happi"));
+    CHECK(find(text, "HAPPI") == string("Happi"));
+    CHECK(find(text, "HaPpI") == string("Happi"));
+    /* Add more checks here */
+}
+TEST_CASE("Test replacement of v and w") 
+{
+    string text = "View throught a window";
+    CHECK(find(text, "Wiev") == string("View"));
+    CHECK(find(text, "view") == string("View"));
+ CHECK(find(text, "wiev") == string("View"));
+    CHECK(find(text, "View") == string("View"));
+    CHECK(find(text, "Vindow") == string("window"));
+    CHECK(find(text, "Window") == string("window"));
+CHECK(find(text, "vindow") == string("window"));
+    CHECK(find(text, "vindow") == string("window"));
+   CHECK(find(text, "Vindov") == string("window"));
+    CHECK(find(text, "Window") == string("window"));
+CHECK(find(text, "Vindov") == string("window"));
+    CHECK(find(text, "WindoV") == string("window")); 
+}
+
+TEST_CASE("Test replacement of p and f") 
+{
+    string text = "five pour Feet fure is preferable pffft";
+    CHECK(find(text, "Five") == string("five"));
+ CHECK(find(text, "five") == string("five"));
+ CHECK(find(text, "pive") == string("five"));
+ CHECK(find(text, "Pive") == string("five"));
+    CHECK(find(text, "pure") == string("fure"));
+    CHECK(find(text, "Pure") == string("fure"));
+    CHECK(find(text, "four") == string("pour"));
+CHECK(find(text, "Four") == string("pour"));
+CHECK(find(text, "pffft") == string("pffft"));
+CHECK(find(text, "pfft") == string("pffft")); // False
+CHECK(find(text, "ppfft") == string("pffft"));
+CHECK(find(text, "pfppt") == string("pffft"));
+CHECK(find(text, "fffft") == string("pffft"));
+CHECK(find(text, "pfffo") == string("pffft")); // False
+    CHECK(find(text, "pffft") == string("pffft"));
+CHECK(find(text, "Freferable") == string("preferable"));
+
+}
+
+TEST_CASE("Test replacement of f and b with recurring words") 
+{
+    string text = "fig boose Big balls ";
+    CHECK(find(text, "fig") == string("fig"));
+    CHECK(find(text, "big") == string("fig"));
+    CHECK(find(text, "Big") == string("fig"));
+    CHECK(find(text, "Big") == string("Big"));// False , second word;
+    CHECK(find(text, "pffft") == string("pffft")); // False dont exist 
+}
+TEST_CASE("Test replacement of b and f") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of g and j") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of j and g") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of c and k") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of k and c") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of k and q") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of q and k") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of q and c") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of c and q") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of s and z") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of z and s") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of d and t") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of t and d") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of o and u") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of u and o") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of i and y") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+TEST_CASE("Test replacement of y and i") 
+{
+    string text = "";
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    CHECK(find(text, "") == string(""));
+    
+}
+
